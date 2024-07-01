@@ -90,15 +90,74 @@ public class StouRegister4 extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
+			String str;
 			
+			for (int i=0; i<3; i++) {
+				str = "ชุดวิชาที่ "+(i+1)+" ที่ได้เลือกคือ: ";
+				
+				if (cboSubject[i].getSelectedIndex() != 0)
+					str +=
+	cboSubject[i].getSelectItem();
+				else
+					str +="-";
+				lbSubject[i].setText(str);
+				
+			}
 			
-			
+			card.show(getContentPane(), "page2");
 		}
 			
 		
-		}
+		});
 		
 	}
-
-
+	
+	private void createOutputPanel() {
+		
+		outputPanel = new JPanel();
+		outputPanel.setLayout(new GridBagLayout());
+		
+		GridBagConstraints gbc = new GridBagConstraints();
+		
+		JLabel header = new JLabel("สรุปการกรอกข้อมูล");
+		gbc.insets = new Insets(2, 0, 2, 0);
+		
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		
+		outputPanel.add(header, gbc);
+		
+		for (int i=0; i<3; i++) {
+			lbSubject[i] = new JLabel();
+			gbc.gridx = 0;
+			gbc.gridy++;
+			outputPanel.add(lbSubject[i], gbc);
+		}
+		
+		JButton btnEdit = new JButton("แก้ไข");
+		gbc.anchor = GridBagConstraints.CENTER;
+		
+		gbc.gridx = 0;
+		gbc.gridy++;
+		outputPanel.add(btnEdit, gbc);
+		
+		btnEdit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				card.show(getContentPane(), "page1");
+				
+			}
+		});
+	}
+	
+	public static void main(String[] args) {
+		StouRegister4 frame = new StouRegister4();
+		frame.setSize(500,300);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
 }
